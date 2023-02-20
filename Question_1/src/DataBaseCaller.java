@@ -20,13 +20,16 @@ public class DataBaseCaller {
 	}
 	public static void display() 
 	{
-		System.out.println("************Phone book*********");
+		System.out.println("\n()()()()()()()()Phone book()()()()()()()()()");
+		System.out.printf("| %-15s | %-12s |%n","Name","Phno");
 		for (Map.Entry<Long,String> i : phBook.entrySet())
-			System.out.println(i.getKey()+":"+i.getValue());
+			System.out.printf("| %-15s | %-12s |%n",i.getValue(),i.getKey());
 	}
 	public static void delete(long phno)
 	{
-		phBook.remove(phno);
-		System.out.println("Removing.........done");
+		if(phBook.remove(phno)==null)
+			System.out.println("NO SUCH NUMBER");
+		else
+			System.out.println("Removing.........done");
 	}
 }

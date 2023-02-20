@@ -11,7 +11,8 @@ public class MissedCallDetails {
 		String name=DataBaseCaller.getName(phno);
 		if(name==null)
 			name="Private caller";
-		return "\n\nName:"+name+"\nPh No:\n"+phno+"Time:"+cal.getTime();
+		//return "\n\nName:"+name+"\nPh No:"+phno+"\nTime:"+cal.getTime();
+		return name+"\n"+phno+"\n"+cal.getTime();
 	}
 
 	
