@@ -3,13 +3,8 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Driver {
-	private Driver() {
-		// TODO Auto-generated constructor stub
-		DataBaseCaller.create();
-	}
+	
 	public static void main(String[] args) {
-		//DataBaseCaller book=new DataBaseCaller();
-		Driver d=new Driver();
 		Scanner sc= new Scanner(System.in);
 		LinkedList<MissedCallDetails> miss=new LinkedList<>();
 		Calendar cal=Calendar.getInstance();
@@ -21,31 +16,27 @@ public class Driver {
 			switch (i) {
 			case 1:
 				System.out.println("Enter  ph no");
-				long key=sc.nextLong();
+				long phno=sc.nextLong();
 				System.out.println("Enter name");
-				String value=sc.next();
-				DataBaseCaller.phBook.put(key, value);
+				String name=sc.next();
+				DataBaseCaller.addNewContact(name, phno);
 				break;
 			case 2:
-				if(miss.size()==2)
+				if(miss.size()==10)
 					miss.removeFirst();
 				System.out.println("Enter missed call number");
-				long phno=sc.nextLong(); 
-				String name;
-				if(DataBaseCaller.phBook.get(phno)==null)
-					name="Private caller";
-				else
-					name=DataBaseCaller.phBook.get(phno);
-				miss.add(new MissedCallDetails(cal, phno, name));
+				phno=sc.nextLong(); 
+				miss.add(new MissedCallDetails(cal,phno));
 				break;
 			case 3:DataBaseCaller.display();
 				break;
-			case 4:System.out.println("Misssed call details");
-				for (MissedCallDetails m : miss) {
-				System.out.println(m);
-			}
+			case 4:System.out.println("Misssed call details::");
+				for (MissedCallDetails m : miss)
+					System.out.println(m);
 				break;
-			case 5:
+			case 5:System.out.println("Enter phone number to delete");
+				phno=sc.nextLong();
+				DataBaseCaller.delete(phno);
 				break;
 			case 6:System.exit(0);
 			default:System.out.println("Why?????jus Why???");
