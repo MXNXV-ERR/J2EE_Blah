@@ -42,24 +42,50 @@ public class DataBaseCaller {
 		else
 			System.out.println("Removing.........done");
 	}
-	public static void displayMissedCalls()
-	{
-		System.out.println("::Misssed call details::");
-		System.out.printf("| %-15s | %-12s | %-30s |%n","Name","PhNo","Time");
-		for (MissedCallDetails m : miss) 
-		{
-			String name=phBook.get(m.phno);
-			if(name==null)name="Private Caller";
-			System.out.printf("| %-15s | %-12s | %-30s |%n",name,m.phno,m.cal.getTime());
-		}
-	}
 	public static void addMissedCall()
 	{
 		System.out.println("Enter missed call number");
 		long phno=sc.nextLong();
 		Calendar cal=Calendar.getInstance();
-		miss.add(new MissedCallDetails(cal, phno));
+		miss.addFirst(new MissedCallDetails(cal, phno));
 		if(miss.size()==11)
 			miss.removeFirst();
 	}
+	public static void displayMissedCalls()
+	{
+			System.out.println("One-by-one?(To delete)(y/n)");
+			if(sc.next().equals("y"))
+				onebyone();
+			else
+			{
+				for(MissedCallDetails i:miss)
+				{
+					String name=phBook.get(i.phno);
+					if(name==null)name="Private Caller";
+					System.out.println("\nName:"+name+"\tPhNO:"+i.phno+"\tTime:"+i.cal.getTime());
+				}
+			}
+		
+	}
+	private static void onebyone() {
+		for(int i=0;i<miss.size();i++)
+		{
+			MissedCallDetails c=miss.get(i);
+			String name=phBook.get(c.phno);
+			if(name==null)name="Private Caller";
+			System.out.println("\nPhone number " + i +":"+c.phno);
+			System.out.println("1.Details\n2.Next\n3.Del\nEnter your choice:");
+			switch (sc.nextInt()) {
+				case 1:System.out.println("Name: "+name+"\nPhone number: "+c.phno+"\nTime: "+c.cal.getTime());
+					break;
+				case 2:continue;
+				case 3:miss.remove(i);
+					break;
+				default:System.out.println("Invalid!!!");
+					break;
+			}
+			i--;
+		}
+	}
+	
 }
