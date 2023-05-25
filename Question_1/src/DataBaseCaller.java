@@ -48,44 +48,14 @@ public class DataBaseCaller {
 		long phno=sc.nextLong();
 		Calendar cal=Calendar.getInstance();
 		miss.addFirst(new MissedCallDetails(cal, phno));
-		if(miss.size()==11)
-			miss.removeFirst();
 	}
 	public static void displayMissedCalls()
-	{
-			System.out.println("One-by-one?(To delete)(y/n)");
-			if(sc.next().equals("y"))
-				onebyone();
-			else
-			{
-				for(MissedCallDetails i:miss)
-				{
-					String name=phBook.get(i.phno);
-					if(name==null)name="Private Caller";
-					System.out.println("\nName:"+name+"\tPhNO:"+i.phno+"\tTime:"+i.cal.getTime());
-				}
-			}
-		
-	}
-	private static void onebyone() {
-		for(int i=0;i<miss.size();i++)
+	{	
+		for(MissedCallDetails i:miss)
 		{
-			MissedCallDetails c=miss.get(i);
-			String name=phBook.get(c.phno);
+			String name=phBook.get(i.phno);
 			if(name==null)name="Private Caller";
-			System.out.println("\nPhone number " + i +":"+c.phno);
-			System.out.println("1.Details\n2.Next\n3.Del\nEnter your choice:");
-			switch (sc.nextInt()) {
-				case 1:System.out.println("Name: "+name+"\nPhone number: "+c.phno+"\nTime: "+c.cal.getTime());
-					break;
-				case 2:continue;
-				case 3:miss.remove(i);
-					break;
-				default:System.out.println("Invalid!!!");
-					break;
-			}
-			i--;
+			System.out.println("\nName:"+name+"\tPhNO:"+i.phno+"\tTime:"+i.cal.getTime());
 		}
 	}
-	
 }
