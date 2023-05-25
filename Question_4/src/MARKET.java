@@ -1,3 +1,4 @@
+package prog4;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -97,7 +98,13 @@ public class MARKET implements ActionListener {
 		}
 		else
 		{
-			double amount=150- 150*0.30;
+			double amount=0;
+			if(item_no.getText().equals("1"))
+				amount=150*Integer.parseInt(kg.getText());
+			if(item_no.getText().equals("2"))
+				amount=60*Integer.parseInt(kg.getText());
+			if(rb1.isSelected())
+				amount-= (amount*0.30);
 			am.setText("after discount="+amount);
 			
 		}
